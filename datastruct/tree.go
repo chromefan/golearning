@@ -28,5 +28,21 @@ func main()  {
 	root := arrayToTree(data,0,len(data)-1)
 	fmt.Println("转换成树的中序遍历")
 	PrintTreeMidOrder(root)
+}
 
+var max int
+func FindMaxSubTree(root *BNode,maxRoot *BNode) int {
+	if root == nil {
+		return 0
+	}
+	//求出root所有左子树节点的和
+	lmax := FindMaxSubTree(root.LeftChild,maxRoot)
+	//求出root所有右子树节点的和
+	rmax := FindMaxSubTree(root.RightChild,maxRoot)
+	sum := lmax + rmax + root.Data.(int)
+	if sum > max {
+		max = sum
+		maxRoot.Data = root.Data
+	}
+	return sum
 }

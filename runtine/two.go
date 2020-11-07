@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"time"
 )
 
 func main() {
@@ -23,7 +24,5 @@ func main() {
 			}
 		}
 	}(ch)
-	close(ch)
-	//close(ch2)
-	//time.Sleep(100 * time.Second)
+	time.Sleep(3 * time.Second)
 }

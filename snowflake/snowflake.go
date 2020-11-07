@@ -10,8 +10,8 @@ import (
 
 const (
 	twepoch        = int64(1417937700000) // 默认起始的时间戳 1449473700000 。计算时，减去这个值
-	DistrictIdBits = uint(5)              //区域 所占用位置
-	NodeIdBits     = uint(9)              //节点 所占位置
+	DistrictIdBits = uint(2)              //区域 所占用位置
+	NodeIdBits     = uint(4)              //节点 所占位置
 	sequenceBits   = uint(10)             //自增ID 所占用位置
 
 	/*
@@ -116,10 +116,10 @@ func (id *IdWorker) nextid() (int64, error) {
 }
 
 func main()  {
-	noteid := int64(22)
+	noteid := int64(1)
 	idw, _ := NewIdWorker(noteid)
 	id ,_ := idw.NextId()
 	str := strconv.FormatInt(id,10)
-	l :=  len("19588256791632")
+	l :=  len(str)
 	fmt.Println(str,id,l)
 }
