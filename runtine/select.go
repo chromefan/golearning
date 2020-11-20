@@ -1,20 +1,35 @@
 package main
 
-func main() {
-	println("start main")
-	ch := make(chan int)
+import (
+	"fmt"
+	"sync"
+	"time"
+)
 
-	var result int
+func start()  {
+	ch := make(chan int)
+	var wg sync.WaitGroup
+	wg.Add(1)
 	go func() {
 		println("come into goroutine1")
-		var r int
-		for i := 1; i <= 10; i++ {
-			r += i
+		for c := range ch {
+			fmt.Println(c)
 		}
-		ch <- r
+		fmt.Println("werwer")
 	}()
+	fmt.Println("done ")
+	defer func() {
+		fmt.Println("defer done ")
+	}()
+	wg.Wait()
+}
+func main() {
+	println("start main")
+	start()
+	time.Sleep(10*time.Second)
 
-	go func() {
+
+	/*go func() {
 		println("come into goroutine2")
 		var r int = 1
 		for i := 1; i <= 10; i++ {
@@ -30,8 +45,8 @@ func main() {
 
 	for i := 0; i < 3; i++ {
 		result += <-ch
-	}
-	close(ch)
+	}*/
+	/*//close(ch)
 	println("result is:", result)
-	println("end main")
+	println("end main")*/
 }

@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"runtime"
 	"time"
 )
 
@@ -16,6 +17,7 @@ func main() {
 		go add(workList)
 	}
 	//go dcr(workList)
+	runtime.GC()
 	res := <- workList
 	fmt.Println("end",res)
 	elapsed := time.Since(t1)
