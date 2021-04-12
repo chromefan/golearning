@@ -18,8 +18,8 @@ const (
 
 func main() {
 
-
-
+	//Exp10(uint64(2))
+	PrintNum(100)
 
 	str := "234234/234"
 	kv := strings.Split(str, "_")
@@ -41,6 +41,24 @@ func main() {
 	fmt.Println(t3.Hours()/24)
 }
 
+//0
+//1
+//1,2
+//1,2,3.0000
+func PrintNum(n uint64){
+	m := Exp10(n)-1
+	for i:= uint64(1) ;i <= (m) ;i++ {
+		fmt.Println(i)
+	}
+}
+func Exp10 (n uint64) uint64{
+	r := uint64(10)
+	for i := uint64(1) ; i < n ; i++ {
+		r = r * uint64(10)
+	}
+	fmt.Println(r)
+	return r
+}
 func GetTodayTimeStamp() int64 {
 	timeStr := time.Now().Format("2006-01-02")
 	t, _ := time.Parse("2006-01-02", timeStr)
