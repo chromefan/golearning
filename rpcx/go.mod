@@ -10,6 +10,9 @@ require (
 	github.com/coreos/go-semver v0.3.0 // indirect
 	github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f // indirect
 	github.com/edwingeng/doublejump v0.0.0-20200330080233-e4ea8bd1cbed // indirect
+	github.com/facebookgo/grace v0.0.0-20180706040059-75cf19382434 // indirect
+	github.com/facebookgo/httpdown v0.0.0-20180706035922-5979d39b15c2 // indirect
+	github.com/facebookgo/stats v0.0.0-20151006221625-1b76add642e4 // indirect
 	github.com/fatih/color v1.10.0 // indirect
 	github.com/go-errors/errors v1.1.1 // indirect
 	github.com/gogo/protobuf v1.3.1 // indirect
@@ -38,6 +41,7 @@ require (
 	github.com/smallnest/quick v0.0.0-20200505103731-c8c83f9c76d3 // indirect
 	github.com/smallnest/rpcx v0.0.0-20201027145221-c31b15be63d4
 	gitlab.etsus.net/box-connector/box-connector-protobuf v0.0.0-20201027064857-467158b33213 // indirect
+	gitlab.wd.com/webgroup/user-center/user-center-protobuf v0.0.0-20201210094354-ed014961f52b // indirect
 	go.etcd.io/etcd v3.3.25+incompatible // indirect
 	go.opencensus.io v0.22.5 // indirect
 	go.opentelemetry.io/otel v0.13.0 // indirect
@@ -58,3 +62,7 @@ require (
 )
 
 replace google.golang.org/grpc => google.golang.org/grpc v1.26.0
+
+replace (
+	gitlab.wd.com/webgroup/user-center/user-center-protobuf v0.0.0-20201210094354-ed014961f52b =>  /Users/luohuanjun/go/src/gitlab.wd.com/webgroup/user-center/user-center-protobuf
+)

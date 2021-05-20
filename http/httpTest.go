@@ -16,6 +16,7 @@ func main() {
 	baseurl := "http://127.0.0.1:8089/"
 
 	run(ch,baseurl)
+	time.Sleep(3*time.Second)
 
 }
 
@@ -35,6 +36,7 @@ func run(ch chan int,baseurl string) {
 					fnum ++
 				}
 				fmt.Printf("res : %s num :%d fnum: %d \n", res, num, fnum)
+				return
 			}
 		}()
 	}
@@ -48,7 +50,7 @@ func run(ch chan int,baseurl string) {
 // url:请求地址
 // response:请求返回的内容
 func Get(url string) (string, error) {
-	client := http.Client{Timeout: 5 * time.Second}
+	client := http.Client{Timeout: 1 * time.Second}
 	resp, err := client.Get(url)
 	if err != nil {
 		return "", err
@@ -65,7 +67,6 @@ func Get(url string) (string, error) {
 			return "", err
 		}
 	}
-
 	return result.String(), nil
 }
 

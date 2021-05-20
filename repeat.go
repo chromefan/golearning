@@ -102,9 +102,25 @@ func FindRepeatStr(str string) string {
 
 }
 
+func getMaxAscendingLen(str string) int  {
+	maxLen := make([]int,len(str))
+	maxListLen := 1
+	for i,_ := range str{
+		maxLen[i] = 1
+		for j:=0 ; j< i; j++{
+			if str[j] < str[i] &&  maxLen[j] > maxLen[i] - 1{
+				maxLen[i] = maxLen[j] + 1
+				maxListLen = maxLen[i]
+			}
+		}
+	}
+	fmt.Println(maxListLen)
+	return maxListLen
+}
 func main() {
 	str := "abcabcabab"
 	//str := "abcdabc"
 	resp := FindRepeatStr(str)
-	fmt.Println(resp)
+	max := getMaxAscendingLen(str)
+	fmt.Println(resp,max)
 }

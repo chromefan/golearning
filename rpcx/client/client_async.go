@@ -4,6 +4,7 @@ import (
 	"app/golearning/rpcx/tserver"
 	"context"
 	"flag"
+	"fmt"
 	"log"
 	"github.com/smallnest/rpcx/client"
 )
@@ -26,6 +27,7 @@ func main() {
 
 	reply := &tserver.Reply{}
 	call, err := xclient.Go(context.Background(), "Mul", args, reply, nil)
+	fmt.Println(call)
 	if err != nil {
 		log.Fatalf("failed to call: %v", err)
 	}

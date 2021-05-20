@@ -6,6 +6,8 @@ import (
 	"time"
 )
 
+const Topic = "msg-test"
+
 var messagePubHandler mqtt.MessageHandler = func(client mqtt.Client, msg mqtt.Message) {
 	fmt.Printf("Received message: %s from topic: %s\n", msg.Payload(), msg.Topic())
 }
@@ -44,7 +46,7 @@ func publish(client mqtt.Client) {
 	num := 10
 	for i := 0; i < num; i++ {
 		text := fmt.Sprintf("deviceId 0a63dc44-c27f-0cbf-d09a-745fbd4a7aed , Message %d",i)
-		token := client.Publish("topic/deviceid/0a63dc44-c27f-0cbf-d09a-745fbd4a7aed", 0, false, text)
+		token := client.Publish("topic/"+Topic, 0, false, text)
 		token.Wait()
 		time.Sleep(time.Second)
 	}
@@ -52,8 +54,7 @@ func publish(client mqtt.Client) {
 
 func sub(client mqtt.Client) {
 	//deviceId,_ := uuid.GenerateUUID()
-	deviceId := "0a63dc44-c27f-0cbf-d09a-745fbd4a7aed"
-	topic := "topic/deviceid/"+deviceId
+	topic := "topic/"+Topic
 	token := client.Subscribe(topic, 0, nil)
 	token.Wait()
 	fmt.Printf("Subscribed to topic: %s", topic)

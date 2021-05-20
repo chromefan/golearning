@@ -4,6 +4,7 @@ import (
 	"app/golearning/rpcx/tserver"
 	"context"
 	"flag"
+	"fmt"
 	"log"
 	"math/rand"
 	"time"
@@ -23,7 +24,7 @@ func main() {
 
 
 
-	for {
+
 		a := rand.Intn(100)
 		b := rand.Intn(100)
 		args := &tserver.Args{
@@ -31,13 +32,19 @@ func main() {
 			B: b,
 		}
 		reply := &tserver.Reply{}
-		err := xclient.Call(context.Background(), "Mul", args, reply)
+		ctxt, cancel := context.WithTimeout(context.Background(), 1*time.Second)
+		defer func() {
+			cancel()
+			fmt.Println("timeout",ctxt)
+		}()
+
+		err := xclient.Call(ctxt, "Mul", args, reply)
 		if err != nil {
 			log.Fatalf("failed to call: %v", err)
 		}
 
 		log.Printf("%d * %d = %d", args.A, args.B, reply.C)
 		time.Sleep(1e9)
-	}
+
 
 }

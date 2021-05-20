@@ -19,15 +19,26 @@ const (
 func main() {
 
 	//Exp10(uint64(2))
-	PrintNum(100)
-
+	//PrintNum(100)
+	thisdate := "2006-01-02 15:04:05"
+	t := time.Now()
+	fmt.Println(t)
+	fmt.Println(t.Hour())
+	str1 := "2021-04-21 01:00:00"
+	loc, _ := time.LoadLocation("Asia/Shanghai")
+	tt,_ := time.ParseInLocation(thisdate,str1,loc)
+	fmt.Println(tt)
+	fmt.Println(tt.Hour())
+	tm := time.Unix(1618971935,0)
+	fmt.Println(tm.Hour())
+	return
 	str := "234234/234"
 	kv := strings.Split(str, "_")
 	fmt.Println(len(kv),kv)
 	fmt.Println(GetTodayTimeStamp())
 	newTime := time.Now().AddDate(0,0,2).Unix()
 	fmt.Println(newTime)
-	thisdate := "2006-01-02 15:04:05"
+
 	lasttime := time.Now().Format(thisdate)
 	fmt.Println(lasttime)
 	str_time := time.Unix(1555570300, 0).Format("20060102")

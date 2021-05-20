@@ -16,14 +16,17 @@ type Reply struct {
 
 type Arith int
 
+type Context struct{
+	ctx *context.Context
+}
 func (t *Arith) Mul(ctx context.Context, args *Args, reply *Reply) error {
-	reply.C = args.A * args.B
+	reply.C = 0
 	fmt.Printf("call: %d * %d = %d\n", args.A, args.B, reply.C)
 	return nil
 }
 
 func (t *Arith) Add(ctx context.Context, args *Args, reply *Reply) error {
-	reply.C = args.A + args.B
+	reply.C = 0
 	fmt.Printf("call: %d + %d = %d\n", args.A, args.B, reply.C)
 	return nil
 }

@@ -12,7 +12,7 @@ import (
 
 var (
 	etcdAddr = flag.String("etcdAddr", "localhost:2379", "etcd address")
-	basePath = flag.String("base", "/etcd_test", "prefix path")
+	basePath = flag.String("base", "/rpcx/etcd_test", "prefix path")
 )
 
 func main() {

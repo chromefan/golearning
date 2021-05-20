@@ -18,7 +18,20 @@ func arrAdd(numArr []int) {
 	}
 }
 
+func strToInt(str string)  uint64 {
+	n := uint64(0)
+	max := len(str)
+	for i := 0;i < max ;i++ {
+		ch := str[i]-'0'
+		n = 10*n+uint64(ch)
+		fmt.Println(n,uint64(ch))
+	}
+	return n
+}
 func main()  {
+	str := "1234"
+	strToInt(str)
+	fmt.Println("hello")
 	arr := []int{1,3,0,4,-1,-3,0}
 	arrAdd(arr)
 }

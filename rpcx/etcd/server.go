@@ -14,7 +14,7 @@ import (
 var (
 	addr     = flag.String("addr", "localhost:8972", "server address")
 	etcdAddr = flag.String("etcdAddr", "localhost:2379", "etcd address")
-	basePath = flag.String("base", "/etcd_test", "prefix path")
+	basePath = flag.String("base", "/rpcx/etcd_test", "prefix path")
 )
 
 func main() {
@@ -26,7 +26,7 @@ func main() {
 	s.RegisterName("Arith", new(tserver.Arith), "")
 	go s.Serve("tcp", *addr)
 
-	time.Sleep(time.Minute)
+	time.Sleep(100*time.Minute)
 
 	err := s.UnregisterAll()
 	if err != nil {
