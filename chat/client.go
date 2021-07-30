@@ -11,7 +11,8 @@ import (
 )
 
 func main() {
-	conn, err := net.Dial("tcp", "127.0.0.1:39520")
+	test(1,"sdf")
+	conn, err := net.Dial("tcp", "104.225.159.223:39520")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -42,4 +43,7 @@ func mustCopy(dst io.Writer, src io.Reader) {
 	if _, err := io.Copy(dst, src); err != nil {
 		log.Fatal(err)
 	}
+}
+func test(src,key string)  {
+	fmt.Println(src,key)
 }

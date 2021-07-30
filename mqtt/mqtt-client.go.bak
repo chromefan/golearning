@@ -1,14 +1,12 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
 	mqtt "github.com/eclipse/paho.mqtt.golang"
-	"os"
 	"time"
 )
 
-const Topic = "msg-chart"
+const Topic = "msg-test"
 
 var messagePubHandler mqtt.MessageHandler = func(client mqtt.Client, msg mqtt.Message) {
 	fmt.Printf("Received message: %s from topic: %s\n", msg.Payload(), msg.Topic())
@@ -23,7 +21,7 @@ var connectLostHandler mqtt.ConnectionLostHandler = func(client mqtt.Client, err
 }
 
 func main() {
-	var broker = "127.0.0.1"
+	var broker = "broker.emqx.io"
 	var port = 1883
 	opts := mqtt.NewClientOptions()
 	opts.AddBroker(fmt.Sprintf("tcp://%s:%d", broker, port))
@@ -39,25 +37,18 @@ func main() {
 	}
 
 	go sub(client)
-	go send(client)
-	time.Sleep(1000*time.Second)
+	go publish(client)
+	time.Sleep(100*time.Second)
 	client.Disconnect(250)
 }
 
-func send(client mqtt.Client) {
-	// 从标准输入流中接收输入数据
-	input := bufio.NewScanner(os.Stdin)
-	fmt.Printf("Please type in something:\n")
-	// 逐行扫描
-	for input.Scan() {
-		line := input.Text()
-		// 输入bye时 结束
-		if line == "bye" {
-			break
-		}
-		text := fmt.Sprintf(" : %s\n", line)
+func publish(client mqtt.Client) {
+	num := 10
+	for i := 0; i < num; i++ {
+		text := fmt.Sprintf("deviceId 0a63dc44-c27f-0cbf-d09a-745fbd4a7aed , Message %d",i)
 		token := client.Publish("topic/"+Topic, 0, false, text)
 		token.Wait()
+		time.Sleep(time.Second)
 	}
 }
 
